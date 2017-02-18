@@ -10,6 +10,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 }])
 
 .controller('TestsCtrl', function($scope) {
+	$scope.selectedStep = 0;
 	$scope.step1 = {
 		completed: false,
 		disabled: false
@@ -23,24 +24,38 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		disabled: true
 	};
 
+	$scope.testToRun = 0;
 	$scope.tests = [
 		{
-			group: "Upload",
+			id: 0,
 			label: "Upload Small Amount of Data"
 		},
 		{
-			group: "Upload",
+			id: 1,
 			label: "Upload Large Amount of Data"
 		},
 		{
-			group: "Download",
+			id: 2,
 			label: "Retrieve Small Amount of Data"
 		},
 		{
-			group: "Download",
+			id: 3,
 			label: "Retrieve Large Amount of Data"
+		},
+		{
+			id: 4,
+			label: "Update Small Amount of Data"
+		},
+		{
+			id: 5,
+			label: "Update Large Amount of Data"
 		}
 	];
 
-	$scope.selectedTest = {};
+	$scope.testChosen = function(test){
+		console.log(test);
+		$scope.step1.completed = true;
+		$scope.step2.disabled = false;
+		$scope.selectedStep = 1;
+	}
 });
