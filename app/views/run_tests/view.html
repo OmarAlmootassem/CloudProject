@@ -1,1 +1,17 @@
-<p>Tests</p>
+<md-content layout-padding>
+	<md-stepper-card-content flex="nogrow" style="margin: auto;">
+		<md-steppers md-stretch-steppers="always">
+		    <md-step label="Select Tests" md-complete="step1.completed"  ng-disabled="step1.disabled">
+		        <md-content>
+		        
+		        </md-content>
+		    </md-step>
+		    <md-step label="Select Databases" md-complete="step2.completed"  ng-disabled="step2.disabled">
+		        <md-content></md-content>
+		    </md-step>
+		    <md-step label="Review and Confirm" md-complete="step3.completed"  ng-disabled="step3.disabled">
+		        <md-content></md-content>
+		    </md-step>
+		</md-steppers>
+	</md-stepper-card-content>
+</md-content>
