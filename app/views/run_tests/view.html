@@ -6,7 +6,7 @@
 		        	<md-content flex layout-fill style="height: 70vh;">
 			        	<h2 layout="row" layout-align="center">Select 1 test from the list below to run</h2>
 			        	<md-radio-group ng-model="testToRun" layout="row" layout-align="space-around center" layout-wrap>
-			        		<md-radio-button md-no-ink value="{{test.id}}" class="md-primary" style="margin-bottom: 2em;" ng-repeat="test in tests track by $index">{{test.label}}</md-radio-button>
+			        		<md-radio-button value="{{test.id}}" class="md-primary" style="margin-bottom: 2em;" ng-repeat="test in tests track by $index">{{test.label}}</md-radio-button>
 			        	</md-radio-group>
 			        	<div layout="row" layout-align="end">
 			        		<md-button class="md-raised md-primary" ng-click="testChosen(testToRun)">Continue</md-button>
@@ -15,7 +15,19 @@
 		        </md-step-body>
 		    </md-step>
 		    <md-step label="Select Databases" md-complete="step2.completed" ng-disabled="step2.disabled">
-		        <md-content></md-content>
+		        <md-step-body>
+		        	<md-content flex layout-fill style="height: 70vh;">
+		        		<h2 layout="row" layout-align="center">Select the databases to test</h2>
+		        		<div layout="row" layout-align="space-around center" layout-wrap flex>
+		        			<md-checkbox ng-repeat="database in databases" class="animated md-primary" aria-label="database.name" ng-click="database.selected = !database.selected" ng-class="error ? 'flash' : ''">
+		        				{{database.name}}
+		        			</md-checkbox>
+		        		</div>
+			        	<div layout="row" layout-align="end">
+			        		<md-button class="md-raised md-primary" ng-click="databasesChosen(databases)">Continue</md-button>
+			        	</div>
+		        	</md-content>
+		        </md-step-body>
 		    </md-step>
 		    <md-step label="Review and Confirm" md-complete="step3.completed" ng-disabled="step3.disabled">
 		        <md-content></md-content>
