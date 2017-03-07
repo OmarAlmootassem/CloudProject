@@ -55,22 +55,27 @@ angular.module('CloudApp.tests', ['ngRoute'])
 	$scope.databases = [
 		{
 			name: "MongoDB",
+			avatar: "http://d2kv389z282s26.cloudfront.net/wp-content/blogs.dir/1/files/2015/01/MongoDB_Logo.png",
 			selected: false
 		},
 		{
 			name: "HBase",
+			avatar: "https://svn.apache.org/repos/asf/hbase/hbase.apache.org/trunk/images/big_h_logo.svg",
 			selected: false
 		},
 		{
 			name: "DynamoDB",
+			avatar: "https://cdn.worldvectorlogo.com/logos/aws-dynamodb.svg",
 			selected: false
 		},
 		{
 			name: "Cassandra",
+			avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Cassandra_logo.svg/800px-Cassandra_logo.svg.png",
 			selected: false
 		},
 		{
 			name: "Firebase",
+			avatar: "https://lh3.googleusercontent.com/-whXBCDVxIto/Vz2Rsyz-UjI/AAAAAAAAiJc/UjvR-M2b9tY5SyKFkDY6Q_MbusEINRXkQ/w1024-h1024/Firebase_16-logo.png",
 			selected: false
 		}
 	];
