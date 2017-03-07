@@ -19,6 +19,12 @@ angular.module('CloudApp', ['ngMaterial', 'md-steppers', 'timer',
 		$scope.currentNavItem = $location.path().substring(1);
 	});
 
+	firebase.auth().signInAnonymously().catch(function(error){
+		var errorCode = error.code;
+		var errorMessage = error.message;
+		console.error(errorCode + ": " + errorMessage);
+	});
+
 
 	$scope.goTo = function(view){
 

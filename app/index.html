@@ -51,6 +51,20 @@
   <div ng-view></div>
 
   <!-- <div>Angular seed app: v<span app-></span></div> -->
+
+  <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBCYEttWsiJN3Bt8nS-t3yWgAk592gyW1o",
+      authDomain: "nosql-db-comparison.firebaseapp.com",
+      databaseURL: "https://nosql-db-comparison.firebaseio.com",
+      storageBucket: "nosql-db-comparison.appspot.com",
+      messagingSenderId: "1058690814890"
+    };
+    firebase.initializeApp(config);
+  </script>
+
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
