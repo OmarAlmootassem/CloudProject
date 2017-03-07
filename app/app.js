@@ -15,11 +15,9 @@ angular.module('CloudApp', ['ngMaterial', 'md-steppers',
 })
 
 .controller('MainCtrl', function($scope, $location){
-	if ($location.path() == "/charts"){
-		$scope.currentNavItem = 'charts';
-	} else if ($location.path() == "/run_tests"){
-		$scope.currentNavItem = "run_tests";
-	}
+	$scope.$on('$locationChangeStart', function(event){
+		$scope.currentNavItem = $location.path().substring(1);
+	});
 
 
 	$scope.goTo = function(view){
