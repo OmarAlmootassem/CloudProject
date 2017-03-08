@@ -111,4 +111,14 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			);
 		}
 	}
+
+	$scope.editDB = function(){
+		$scope.selectedStep = 1;
+		$scope.step3.disabled = true;
+	}
+
+	$scope.changeTest = function(){
+		$scope.selectedStep = 0;
+		$scope.step3.disabled = true;
+	}
 });
