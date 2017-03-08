@@ -110,6 +110,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.step2.completed = true;
 			$scope.step3.disabled = false;
 			$scope.selectedStep = 2;
+			getDataFromFirebase();
 		} else {
 			$scope.error = true;
 			$mdToast.show(
@@ -125,15 +126,6 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		switch(test.id){
 			case 0: //Upload Small Data
 				console.log("Test1");
-				firebase.storage().ref('test_files/small.json').getDownloadURL().then(function(url){
-					console.log(url);
-					$http.get(url).then(function(data){
-						console.log(data);
-						firebase.database().ref().push(data.data);
-					});
-				}).catch(function(error){
-					console.error(error.code + ": " + error.message);
-				});
 				break;
 			case 1:
 				break;
@@ -155,6 +147,19 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			if($scope.tests[i].selected)
 				return $scope.tests[i];
 		}
+	}
+
+	function getDataFromFirebase(){
+		firebase.storage().ref('test_files/small.json').getDownloadURL().then(function(url){
+			console.log(url);
+			$http.get(url).then(function(data){
+				console.log(data);
+				$scope.data = JSON.stringify(data.data, null, 4);
+				//firebase.database().ref().push(data.data);
+			});
+		}).catch(function(error){
+			console.error(error.code + ": " + error.message);
+		});
 	}
 
 	$scope.editDB = function(){
