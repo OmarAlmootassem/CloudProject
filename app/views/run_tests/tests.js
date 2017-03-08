@@ -110,7 +110,24 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.step2.completed = true;
 			$scope.step3.disabled = false;
 			$scope.selectedStep = 2;
-			getDataFromFirebase();
+
+			switch(getSelectedTest().id){
+				case 0: //Upload Small Data
+					getSmallDataFromFirebase();
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				case 5:
+					break;
+				default:
+					break;
+			}
 		} else {
 			$scope.error = true;
 			$mdToast.show(
@@ -149,7 +166,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		}
 	}
 
-	function getDataFromFirebase(){
+	function getSmallDataFromFirebase(){
 		firebase.storage().ref('test_files/small.json').getDownloadURL().then(function(url){
 			console.log(url);
 			$http.get(url).then(function(data){
