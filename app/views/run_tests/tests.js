@@ -9,7 +9,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
   });
 }])
 
-.controller('TestsCtrl', function($scope, $mdToast) {
+.controller('TestsCtrl', function($scope, $http, $mdToast) {
 	$scope.selectedStep = 0;
 	$scope.step1 = {
 		completed: false,
@@ -28,27 +28,33 @@ angular.module('CloudApp.tests', ['ngRoute'])
 	$scope.tests = [
 		{
 			id: 0,
-			label: "Upload Small Amount of Data"
+			label: "Upload Small Amount of Data",
+			selected: false
 		},
 		{
 			id: 1,
-			label: "Upload Large Amount of Data"
+			label: "Upload Large Amount of Data",
+			selected: false
 		},
 		{
 			id: 2,
-			label: "Retrieve Small Amount of Data"
+			label: "Retrieve Small Amount of Data",
+			selected: false
 		},
 		{
 			id: 3,
-			label: "Retrieve Large Amount of Data"
+			label: "Retrieve Large Amount of Data",
+			selected: false
 		},
 		{
 			id: 4,
-			label: "Update Small Amount of Data"
+			label: "Update Small Amount of Data",
+			selected: false
 		},
 		{
 			id: 5,
-			label: "Update Large Amount of Data"
+			label: "Update Large Amount of Data",
+			selected: false
 		}
 	];
 
@@ -81,7 +87,9 @@ angular.module('CloudApp.tests', ['ngRoute'])
 	];
 
 	$scope.testChosen = function(test){
-		console.log(test);
+		$scope.tests[test].selected = true;
+		console.log($scope.tests[test].label);
+
 		$scope.error = false;
 		$scope.step1.completed = true;
 		$scope.step2.disabled = false;
@@ -109,6 +117,43 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			  .textContent('Please Select At Least 1 Database')
 			  .hideDelay(5000)
 			);
+		}
+	}
+
+	$scope.startTest = function(){
+		var test = getSelectedTest();
+		switch(test.id){
+			case 0: //Upload Small Data
+				console.log("Test1");
+				firebase.storage().ref('test_files/small.json').getDownloadURL().then(function(url){
+					console.log(url);
+					$http.get(url).then(function(data){
+						console.log(data);
+						firebase.database().ref().push(data.data);
+					});
+				}).catch(function(error){
+					console.error(error.code + ": " + error.message);
+				});
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			default:
+				break;
+		}
+	}
+
+	function getSelectedTest(){
+		for (var i = $scope.tests.length - 1; i >= 0; i--) {
+			if($scope.tests[i].selected)
+				return $scope.tests[i];
 		}
 	}
 
