@@ -85,12 +85,13 @@
 			        		<md-button class="md-raised md-primary" style="width: 97%" ng-click="startTest()">Run Test</md-button>
 			        	</div>
 			        	<div>
-			        		<div class="container visible">
+			        		<div class="container visible" ng-if="running">
 			        			<md-progress-linear md-mode="query"></md-progress-linear>
 			        			<div class="bottom-block">
-			        				<span>Loading application libraries...</span>
+			        				<span>{{message}}</span>
 			        			</div>
 			        		</div>
+			        		<timer autostart="false">{{millis}} ms</timer>
 			        	</div>
 			        </div>
 		        </md-content>

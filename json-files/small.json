@@ -1,6 +1,150 @@
 {
-	"firstname": "Omar",
-	"lastname": "Almootassem",
-	"university": "UOIT",
-	"age": 22
+  "data_type": "small",
+  "query": {
+    "count": 1,
+    "created": "2017-03-11T20:32:38Z",
+    "lang": "en-US",
+    "results": {
+      "channel": {
+        "units": {
+          "distance": "mi",
+          "pressure": "in",
+          "speed": "mph",
+          "temperature": "F"
+        },
+        "title": "Yahoo! Weather - Jerusalem, Jerusalem, IL",
+        "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-1968222/",
+        "description": "Yahoo! Weather for Jerusalem, Jerusalem, IL",
+        "language": "en-us",
+        "lastBuildDate": "Sat, 11 Mar 2017 10:32 PM IST",
+        "ttl": "60",
+        "location": {
+          "city": "Jerusalem",
+          "country": "Palestine",
+          "region": " Jerusalem"
+        },
+        "wind": {
+          "chill": "52",
+          "direction": "225",
+          "speed": "11"
+        },
+        "atmosphere": {
+          "humidity": "54",
+          "pressure": "938.0",
+          "rising": "0",
+          "visibility": "16.1"
+        },
+        "astronomy": {
+          "sunrise": "5:54 am",
+          "sunset": "5:45 pm"
+        },
+        "image": {
+          "title": "Yahoo! Weather",
+          "width": "142",
+          "height": "18",
+          "link": "http://weather.yahoo.com",
+          "url": "http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"
+        },
+        "item": {
+          "title": "Conditions for Jerusalem, Jerusalem, IL at 10:00 PM IST",
+          "lat": "31.7736",
+          "long": "35.224998",
+          "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-1968222/",
+          "pubDate": "Sat, 11 Mar 2017 10:00 PM IST",
+          "condition": {
+            "code": "31",
+            "date": "Sat, 11 Mar 2017 10:00 PM IST",
+            "temp": "53",
+            "text": "Clear"
+          },
+          "forecast": [
+            {
+              "code": "30",
+              "date": "11 Mar 2017",
+              "day": "Sat",
+              "high": "62",
+              "low": "50",
+              "text": "Partly Cloudy"
+            },
+            {
+              "code": "34",
+              "date": "12 Mar 2017",
+              "day": "Sun",
+              "high": "70",
+              "low": "49",
+              "text": "Mostly Sunny"
+            },
+            {
+              "code": "30",
+              "date": "13 Mar 2017",
+              "day": "Mon",
+              "high": "57",
+              "low": "47",
+              "text": "Partly Cloudy"
+            },
+            {
+              "code": "30",
+              "date": "14 Mar 2017",
+              "day": "Tue",
+              "high": "58",
+              "low": "45",
+              "text": "Partly Cloudy"
+            },
+            {
+              "code": "30",
+              "date": "15 Mar 2017",
+              "day": "Wed",
+              "high": "59",
+              "low": "45",
+              "text": "Partly Cloudy"
+            },
+            {
+              "code": "30",
+              "date": "16 Mar 2017",
+              "day": "Thu",
+              "high": "56",
+              "low": "46",
+              "text": "Partly Cloudy"
+            },
+            {
+              "code": "39",
+              "date": "17 Mar 2017",
+              "day": "Fri",
+              "high": "52",
+              "low": "45",
+              "text": "Scattered Showers"
+            },
+            {
+              "code": "39",
+              "date": "18 Mar 2017",
+              "day": "Sat",
+              "high": "49",
+              "low": "44",
+              "text": "Scattered Showers"
+            },
+            {
+              "code": "30",
+              "date": "19 Mar 2017",
+              "day": "Sun",
+              "high": "55",
+              "low": "43",
+              "text": "Partly Cloudy"
+            },
+            {
+              "code": "28",
+              "date": "20 Mar 2017",
+              "day": "Mon",
+              "high": "57",
+              "low": "43",
+              "text": "Mostly Cloudy"
+            }
+          ],
+          "description": "<![CDATA[<img src=\"http://l.yimg.com/a/i/us/we/52/31.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR />Clear\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Sat - Partly Cloudy. High: 62Low: 50\n<BR /> Sun - Mostly Sunny. High: 70Low: 49\n<BR /> Mon - Partly Cloudy. High: 57Low: 47\n<BR /> Tue - Partly Cloudy. High: 58Low: 45\n<BR /> Wed - Partly Cloudy. High: 59Low: 45\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-1968222/\">Full Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n(provided by <a href=\"http://www.weather.com\" >The Weather Channel</a>)\n<BR />\n]]>",
+          "guid": {
+            "isPermaLink": "false"
+          }
+        }
+      }
+    }
+  }
 }

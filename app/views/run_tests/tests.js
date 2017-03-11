@@ -116,6 +116,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 					getSmallDataFromFirebase();
 					break;
 				case 1:
+				getLargeDataFromFirebase();
 					break;
 				case 2:
 					break;
@@ -142,7 +143,6 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		var test = getSelectedTest();
 		switch(test.id){
 			case 0: //Upload Small Data
-				console.log("Test1");
 				break;
 			case 1:
 				break;
@@ -156,6 +156,11 @@ angular.module('CloudApp.tests', ['ngRoute'])
 				break;
 			default:
 				break;
+		}
+		for (var i = $scope.databases.length - 1; i >= 0; i--) {
+			if($scope.databases[i].selected){
+				runTest($scope.databases[i]);
+			}
 		}
 	}
 
@@ -172,11 +177,49 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$http.get(url).then(function(data){
 				console.log(data);
 				$scope.data = JSON.stringify(data.data, null, 4);
-				//firebase.database().ref().push(data.data);
 			});
 		}).catch(function(error){
 			console.error(error.code + ": " + error.message);
 		});
+	}
+
+	function getLargeDataFromFirebase(){
+		firebase.storage().ref('test_files/large.json').getDownloadURL().then(function(url){
+			console.log(url);
+			$http.get(url).then(function(data){
+				console.log(data);
+				$scope.data = JSON.stringify(data.data, null, 4);
+			});
+		}).catch(function(error){
+			console.error(error.code + ": " + error.message);
+		});
+	}
+
+	function runTest(db){
+		if (db.name == "Firebase"){
+			start();
+			$scope.message = "Pushing data to Firebase NoSQL Database...";
+			firebase.database().ref("data/" + JSON.parse($scope.data).data_type).set(JSON.parse($scope.data), function(error){
+				if (error){console.error(error.code + ": " + error.message);} else {
+                	stop();
+				}
+			});
+		} else if (db.name == "DynamoDB"){
+
+		}
+	}
+
+	function start(){
+		$scope.$broadcast('timer-reset');
+		$scope.$broadcast('timer-start');
+		$scope.running = true;
+		$scope.message = "Starting test...";
+	}
+
+	function stop(){
+		$scope.$broadcast('timer-stop');
+		$scope.running = false;
+		$scope.message = "Finished test...";
 	}
 
 	$scope.editDB = function(){
