@@ -10,6 +10,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 }])
 
 .controller('TestsCtrl', function($scope, $http, $mdToast) {
+	var ipInfo;
 	$scope.selectedStep = 0;
 	$scope.step1 = {
 		completed: false,
@@ -24,7 +25,6 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		disabled: true
 	};
 
-	$scope.testToRun = 0;
 	$scope.tests = [
 		{
 			id: 0,
@@ -85,6 +85,9 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			selected: false
 		}
 	];
+	$scope.testToRun = 0;
+
+	getIpAddressInfo();
 
 	$scope.testChosen = function(test){
 		$scope.tests[test].selected = true;
@@ -113,10 +116,10 @@ angular.module('CloudApp.tests', ['ngRoute'])
 
 			switch(getSelectedTest().id){
 				case 0: //Upload Small Data
-					getSmallDataFromFirebase();
+					getDataFromFirebase("small");
 					break;
 				case 1:
-				getLargeDataFromFirebase();
+					getDataFromFirebase("large");
 					break;
 				case 2:
 					break;
@@ -141,22 +144,6 @@ angular.module('CloudApp.tests', ['ngRoute'])
 
 	$scope.startTest = function(){
 		var test = getSelectedTest();
-		switch(test.id){
-			case 0: //Upload Small Data
-				break;
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				break;
-			default:
-				break;
-		}
 		for (var i = $scope.databases.length - 1; i >= 0; i--) {
 			if($scope.databases[i].selected){
 				runTest($scope.databases[i]);
@@ -171,20 +158,8 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		}
 	}
 
-	function getSmallDataFromFirebase(){
-		firebase.storage().ref('test_files/small.json').getDownloadURL().then(function(url){
-			console.log(url);
-			$http.get(url).then(function(data){
-				console.log(data);
-				$scope.data = JSON.stringify(data.data, null, 4);
-			});
-		}).catch(function(error){
-			console.error(error.code + ": " + error.message);
-		});
-	}
-
-	function getLargeDataFromFirebase(){
-		firebase.storage().ref('test_files/large.json').getDownloadURL().then(function(url){
+	function getDataFromFirebase(size){
+		firebase.storage().ref('test_files/' + size + '.json').getDownloadURL().then(function(url){
 			console.log(url);
 			$http.get(url).then(function(data){
 				console.log(data);
@@ -202,12 +177,46 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			firebase.database().ref("data/" + JSON.parse($scope.data).data_type).set(JSON.parse($scope.data), function(error){
 				if (error){console.error(error.code + ": " + error.message);} else {
                 	stop();
+                	saveResults(db, JSON.parse($scope.data).data_type);
 				}
 			});
 		} else if (db.name == "DynamoDB"){
 
+		} else if (db.name = "MongoDB"){
+			start();
+			$http({
+				url: "https://us-central1-nosql-db-comparison.cloudfunctions.net/PostToMongo",
+				method: 'POST',
+				data: $scope.data,
+				headers: {'Content-Type': 'application/json'}
+			}).success(function(data){
+				stop();
+				console.log(data);
+			}).error(function(error){
+				stop();
+				console.error(error);
+			})
 		}
 	}
+
+	function getIpAddressInfo(){
+		$http.get('http://ip-api.com/json/').then(function(data){
+			console.log(data);
+			ipInfo = data.data;
+		});
+	}
+
+	function saveResults(db, type){
+		firebase.database().ref('test_history/' + db.name.toLowerCase() + '/' + type).push({
+			ip: ipInfo,
+			time_ms: $scope.time
+		});
+	}
+
+	$scope.$on('timer-stopped', function (event, data){
+		console.log(data);
+		$scope.time = data.millis;
+	});
 
 	function start(){
 		$scope.$broadcast('timer-reset');
