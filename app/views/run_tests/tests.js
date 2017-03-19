@@ -185,16 +185,16 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		} else if (db.name = "MongoDB"){
 			start();
 			$http({
-				url: "https://us-central1-nosql-db-comparison.cloudfunctions.net/PostToMongo",
+				url: "http://127.0.0.1:3000/data",
 				method: 'POST',
 				data: $scope.data,
 				headers: {'Content-Type': 'application/json'}
 			}).success(function(data){
 				stop();
-				console.log(data);
+				saveResults(db, JSON.parse($scope.data).data_type);
 			}).error(function(error){
 				stop();
-				console.error(error);
+				saveResults(db, JSON.parse($scope.data).data_type);
 			})
 		}
 	}
