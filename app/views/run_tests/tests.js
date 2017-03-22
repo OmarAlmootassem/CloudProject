@@ -181,11 +181,27 @@ angular.module('CloudApp.tests', ['ngRoute'])
 				}
 			});
 		} else if (db.name == "DynamoDB"){
+			start();
+			var data = JSON.parse($scope.data);
+			data.test = guid();
+			console.log(JSON.parse($scope.data));
+			$http({
+				url: "http://localhost:3000/dynamo_data",
+				method: 'POST',
+				data: data,
+				headers: {'Content-Type': 'application/json'}
+			}).success(function(data){
+				stop();
+				saveResults(db, JSON.parse($scope.data).data_type);
+			}).error(function(error){
+				stop();
+				saveResults(db, JSON.parse($scope.data).data_type);
+			});
 
 		} else if (db.name = "MongoDB"){
 			start();
 			$http({
-				url: "http://127.0.0.1:3000/data",
+				url: "http://localhost:3000/data",
 				method: 'POST',
 				data: $scope.data,
 				headers: {'Content-Type': 'application/json'}
@@ -195,7 +211,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			}).error(function(error){
 				stop();
 				saveResults(db, JSON.parse($scope.data).data_type);
-			})
+			});
 		}
 	}
 
@@ -229,6 +245,16 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		$scope.$broadcast('timer-stop');
 		$scope.running = false;
 		$scope.message = "Finished test...";
+	}
+
+	function guid() {
+		function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+				.toString(16)
+				.substring(1);
+		}
+		return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+			s4() + '-' + s4() + s4() + s4();
 	}
 
 	$scope.editDB = function(){
