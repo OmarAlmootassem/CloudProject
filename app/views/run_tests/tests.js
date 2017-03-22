@@ -127,8 +127,10 @@ angular.module('CloudApp.tests', ['ngRoute'])
 					getDataFromFirebase("large");
 					break;
 				case 2:
+					$scope.data = "small"
 					break;
 				case 3:
+					$scope.data = "large"
 					break;
 				case 4:
 					break;
@@ -151,7 +153,10 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		var test = getSelectedTest();
 		for (var i = $scope.databases.length - 1; i >= 0; i--) {
 			if($scope.databases[i].selected){
-				runTest($scope.databases[i]);
+				if (test.id == 0 || test.id == 1)
+					runPostTest($scope.databases[i]);
+				else if (test.id == 2 || test.id == 3)
+					runGetTest($scope.databases[i]);
 			}
 		}
 	}
@@ -175,7 +180,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		});
 	}
 
-	function runTest(db){
+	function runPostTest(db){
 		if (db.name == "Firebase"){
 			start();
 			$scope.message = "Pushing data to Firebase NoSQL Database...";
@@ -187,6 +192,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			});
 		} else if (db.name == "DynamoDB"){
 			start();
+			$scope.message = "Pushing data to DynamoDB...";
 			var data = JSON.parse($scope.data);
 			data.test = guid();
 			console.log(JSON.parse($scope.data));
@@ -205,6 +211,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 
 		} else if (db.name == "MongoDB"){
 			start();
+			$scope.message = "Pushing data to MongoDB...";
 			$http({
 				url: "http://localhost:3000/data",
 				method: 'POST',
@@ -219,6 +226,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			});
 		} else if (db.name == "CouchDB"){
 			start();
+			$scope.message = "Pushing data to CouchDB...";
 			$http({
 				url: "http://localhost:3000/couch_data",
 				method: 'POST',
@@ -234,6 +242,18 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		}
 	}
 
+	function runGetTest(db){
+		if (db.name == "Firebase"){
+			start();
+			$scope.message = "Retreiving Data from Firebase NoSQL Database...";
+			firebase.database().ref('data/' + $scope.data).once('value').then(function(snapshot){
+				$scope.data = JSON.stringify(snapshot.val(), null, 4);
+				stop();
+				saveResults(db, JSON.parse($scope.data).data_type);
+			});
+		}
+	}
+
 	function getIpAddressInfo(){
 		$http.get('http://ip-api.com/json/').then(function(data){
 			console.log(data);
@@ -242,7 +262,12 @@ angular.module('CloudApp.tests', ['ngRoute'])
 	}
 
 	function saveResults(db, type){
-		firebase.database().ref('test_history/' + db.name.toLowerCase() + '/' + type).push({
+		var test = getSelectedTest().id;
+		if (test == 0 || test == 1)
+			test = "post";
+		else if (test == 2 || test == 3)
+			test = "get";
+		firebase.database().ref('test_history/' + test + '/' + db.name.toLowerCase() + '/' + type).push({
 			ip: ipInfo,
 			time_ms: $scope.time
 		});
