@@ -212,7 +212,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			start();
 			$scope.message = "Pushing data to MongoDB...";
 			$http({
-				url: "http://localhost:3000/data",
+				url: "http://localhost:3000/mongo_data",
 				method: 'POST',
 				data: $scope.data,
 				headers: {'Content-Type': 'application/json'}
@@ -256,6 +256,21 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.message = "Retrieving Data from DynamoDB...";
 			$http({
 				url: "http://localhost:3000/dynamo_data_" + $scope.data,
+				method: 'GET',
+				headers: {'Content-Type': 'application/json'}
+			}).success(function(data){
+				stop();
+				$scope.data = JSON.stringify(data, null, 4);
+				saveResults(db, type);
+			}).error(function(error){
+				stop();
+				console.error(error);
+			});
+		} else if (db.name == "MongoDB"){
+			start();
+			$scope.message = "Retrieving Data from MongoDB...";
+			$http({
+				url: "http://localhost:3000/mongo_data_" + $scope.data,
 				method: 'GET',
 				headers: {'Content-Type': 'application/json'}
 			}).success(function(data){
