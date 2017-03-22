@@ -195,7 +195,6 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.message = "Pushing data to DynamoDB...";
 			var data = JSON.parse($scope.data);
 			data.test = guid();
-			console.log(JSON.parse($scope.data));
 			$http({
 				url: "http://localhost:3000/dynamo_data",
 				method: 'POST',
@@ -206,7 +205,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 				saveResults(db, JSON.parse($scope.data).data_type);
 			}).error(function(error){
 				stop();
-				saveResults(db, JSON.parse($scope.data).data_type);
+				console.error(error);
 			});
 
 		} else if (db.name == "MongoDB"){
@@ -222,7 +221,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 				saveResults(db, JSON.parse($scope.data).data_type);
 			}).error(function(error){
 				stop();
-				saveResults(db, JSON.parse($scope.data).data_type);
+				console.error(error);
 			});
 		} else if (db.name == "CouchDB"){
 			start();
@@ -237,19 +236,35 @@ angular.module('CloudApp.tests', ['ngRoute'])
 				saveResults(db, JSON.parse($scope.data).data_type);
 			}).error(function(error){
 				stop();
-				saveResults(db, JSON.parse($scope.data).data_type);
+				console.error(error);
 			});			
 		}
 	}
 
 	function runGetTest(db){
+		var type = $scope.data;
 		if (db.name == "Firebase"){
 			start();
-			$scope.message = "Retreiving Data from Firebase NoSQL Database...";
-			firebase.database().ref('data/' + $scope.data).once('value').then(function(snapshot){
+			$scope.message = "Retrieving Data from Firebase NoSQL Database...";
+			firebase.database().ref('data/' + type).once('value').then(function(snapshot){
 				$scope.data = JSON.stringify(snapshot.val(), null, 4);
 				stop();
 				saveResults(db, JSON.parse($scope.data).data_type);
+			});
+		} else if (db.name == "DynamoDB"){
+			start();
+			$scope.message = "Retrieving Data from DynamoDB...";
+			$http({
+				url: "http://localhost:3000/dynamo_data_" + $scope.data,
+				method: 'GET',
+				headers: {'Content-Type': 'application/json'}
+			}).success(function(data){
+				stop();
+				$scope.data = JSON.stringify(data, null, 4);
+				saveResults(db, type);
+			}).error(function(error){
+				stop();
+				console.error(error);
 			});
 		}
 	}
