@@ -83,6 +83,11 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			name: "Firebase",
 			avatar: "/img/db/firebase.png",
 			selected: false
+		},
+		{
+			name: "CouchDB",
+			avatar: "/img/db/couchdb.png",
+			selected: false
 		}
 	];
 	$scope.testToRun = 0;
@@ -198,7 +203,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 				saveResults(db, JSON.parse($scope.data).data_type);
 			});
 
-		} else if (db.name = "MongoDB"){
+		} else if (db.name == "MongoDB"){
 			start();
 			$http({
 				url: "http://localhost:3000/data",
@@ -212,6 +217,20 @@ angular.module('CloudApp.tests', ['ngRoute'])
 				stop();
 				saveResults(db, JSON.parse($scope.data).data_type);
 			});
+		} else if (db.name == "CouchDB"){
+			start();
+			$http({
+				url: "http://localhost:3000/couch_data",
+				method: 'POST',
+				data: JSON.parse(($scope.data).replace(/[_-]/g, " ")),
+				headers: {'Content-Type': 'application/json'}
+			}).success(function(data){
+				stop();
+				saveResults(db, JSON.parse($scope.data).data_type);
+			}).error(function(error){
+				stop();
+				saveResults(db, JSON.parse($scope.data).data_type);
+			});			
 		}
 	}
 
