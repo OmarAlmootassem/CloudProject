@@ -255,7 +255,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			start();
 			$scope.message = "Retrieving Data from DynamoDB...";
 			$http({
-				url: "http://localhost:3000/dynamo_data_" + $scope.data,
+				url: "http://localhost:3000/dynamo_data_" + type,
 				method: 'GET',
 				headers: {'Content-Type': 'application/json'}
 			}).success(function(data){
@@ -270,7 +270,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			start();
 			$scope.message = "Retrieving Data from MongoDB...";
 			$http({
-				url: "http://localhost:3000/mongo_data_" + $scope.data,
+				url: "http://localhost:3000/mongo_data_" + type,
 				method: 'GET',
 				headers: {'Content-Type': 'application/json'}
 			}).success(function(data){
@@ -281,6 +281,21 @@ angular.module('CloudApp.tests', ['ngRoute'])
 				stop();
 				console.error(error);
 			});
+		} else if (db.name == "CouchDB"){
+			start();
+			$scope.message = "Retrieving Data from CouchDB...";
+			$http({
+				url: "http://localhost:3000/couch_data_" + type,
+				method: 'GET',
+				headers: {'Content-Type': 'application/json'}
+			}).success(function(data){
+				stop();
+				$scope.data = JSON.stringify(data, null, 4);
+				saveResults(db, type);
+			}).error(function(error){
+				stop();
+				console.error(error);
+			});			
 		}
 	}
 
