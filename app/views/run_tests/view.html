@@ -42,10 +42,10 @@
 					          	<md-content style="background-color: rgb(255,255,255)">
 					          		<md-list flex>
 					          			<md-list-item class="md-2-line" ng-repeat="db in databases | filter: {selected: true}" ng-click="null">
-					          			<img ng-src="{{db.avatar}}" class="md-avatar" alt="{{item.who}}" />
-								          <div class="md-list-item-text" layout="column">
-								            <h3>{{db.name}}</h3>
-								          </div>
+					          				<img ng-src="{{db.avatar}}" class="md-avatar" alt="{{item.who}}" />
+								          	<div class="md-list-item-text" layout="column">
+								            	<h3>{{db.name}}</h3>
+								          	</div>
 								        </md-list-item>
 				        			</md-list>
 					          	</md-content>
@@ -64,10 +64,10 @@
 					          	<md-content style="background-color: rgb(255,255,255)">
 					          		<md-list flex>
 					          			<md-list-item class="md-2-line" ng-click="null">
-					          			<img ng-src="/img/testing.png" class="md-avatar" alt="{{item.who}}" />
-								          <div class="md-list-item-text" layout="column">
-								            <h3>{{tests[testToRun].label}}</h3>
-								          </div>
+					          				<img ng-src="/img/testing.png" class="md-avatar" alt="{{item.who}}" />
+								          	<div class="md-list-item-text" layout="column">
+								            	<h3>{{tests[testToRun].label}}</h3>
+								          	</div>
 								        </md-list-item>
 				        			</md-list>
 					          	</md-content>
@@ -91,7 +91,28 @@
 			        				<span>{{message}}</span>
 			        			</div>
 			        		</div>
-			        		<timer autostart="false">{{millis}} ms</timer>
+			        		<md-card>
+			        			<md-card-title>
+			        				<md-card-title-text>
+			        					<span class="md-headline">Test Results</span>
+			        				</md-card-title-text>
+			        			</md-card-title>
+			        			<md-card-content>
+			        				<timer autostart="false">{{millis}} ms</timer>
+			        				<md-content style="background-color: rgb(255,255,255);">
+			        					<md-list flex>
+			        						<md-list-item class="md-3-line" ng-repeat="test in completedTests" ng-click="null">
+			        						<img ng-src="{{test.db.avatar}}" class="md-avatar" alt="{{test.db.name}}"/>
+			        						<div class="md-list-item-text" layout="column">
+			        							<h3>{{test.db.name}}</h3>
+			        							<h4 style="text-transform: initial;">Time: {{test.time}} ms</h4>
+			        							<p>Result: {{test.result}}</p>
+			        						</div>
+			        						</md-list-item>
+			        					</md-list>
+			        				</md-content>
+			        			</md-card-content>
+			        		</md-card>
 			        	</div>
 			        </div>
 		        </md-content>

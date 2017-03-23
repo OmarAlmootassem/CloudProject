@@ -10,7 +10,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 }])
 
 .controller('TestsCtrl', function($scope, $http, $mdToast) {
-	var ipInfo;
+	var ipInfo, data;
 	$scope.selectedStep = 0;
 	$scope.step1 = {
 		completed: false,
@@ -91,6 +91,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		}
 	];
 	$scope.testToRun = 0;
+	$scope.completedTests = [];
 
 	getIpAddressInfo();
 
@@ -127,10 +128,10 @@ angular.module('CloudApp.tests', ['ngRoute'])
 					getDataFromFirebase("large");
 					break;
 				case 2:
-					$scope.data = "small"
+					data = "small"
 					break;
 				case 3:
-					$scope.data = "large"
+					data = "large"
 					break;
 				case 4:
 					getDataFromFirebase("small");
@@ -244,7 +245,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 	}
 
 	function runGetTest(db){
-		var type = $scope.data;
+		var type = data;
 		if (db.name == "Firebase"){
 			start();
 			$scope.message = "Retrieving Data from Firebase NoSQL Database...";
@@ -316,9 +317,16 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			test = "get";
 		else if (test == 4 || test == 5)
 			test = "update"
+
+		var time = $scope.time;
 		firebase.database().ref('test_history/' + test + '/' + db.name.toLowerCase() + '/' + type).push({
 			ip: ipInfo,
-			time_ms: $scope.time
+			time_ms: time
+		});
+		$scope.completedTests.push({
+			db: db,
+			time: time,
+			result: "Sucess"
 		});
 	}
 
