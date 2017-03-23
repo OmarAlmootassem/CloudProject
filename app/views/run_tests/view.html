@@ -19,7 +19,7 @@
 		        	<md-content flex layout-fill style="height: 70vh;">
 		        		<h2 layout="row" layout-align="center">Select the databases to test</h2>
 		        		<div layout="row" layout-align="space-around center" layout-wrap flex>
-		        			<md-checkbox ng-repeat="database in databases" class="animated md-primary" aria-label="database.name" ng-click="database.selected = !database.selected" ng-class="error ? 'flash' : ''">
+		        			<md-checkbox ng-repeat="database in databases" ng-model="database.selected" class="animated md-primary" aria-label="database.name" ng-class="error ? 'flash' : ''">
 		        				{{database.name}}
 		        			</md-checkbox>
 		        		</div>

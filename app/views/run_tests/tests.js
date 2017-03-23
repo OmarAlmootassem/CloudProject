@@ -121,71 +121,15 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			disabled: true
 		};
 
-		$scope.tests = [
-			{
-				id: 0,
-				label: "Upload Small Amount of Data",
-				selected: false
-			},
-			{
-				id: 1,
-				label: "Upload Large Amount of Data",
-				selected: false
-			},
-			{
-				id: 2,
-				label: "Retrieve Small Amount of Data",
-				selected: false
-			},
-			{
-				id: 3,
-				label: "Retrieve Large Amount of Data",
-				selected: false
-			},
-			{
-				id: 4,
-				label: "Update Small Amount of Data",
-				selected: false
-			},
-			{
-				id: 5,
-				label: "Update Large Amount of Data",
-				selected: false
-			}
-		];
+		for(var i = 0; i < $scope.tests.length; i++){
+			$scope.tests[i].selected = false;
+		}
 
-		$scope.databases = [
-			{
-				name: "MongoDB",
-				avatar: "/img/db/mongo.png",
-				selected: false
-			},
-			{
-				name: "HBase",
-				avatar: "/img/db/hbase.svg",
-				selected: false
-			},
-			{
-				name: "DynamoDB",
-				avatar: "/img/db/dynamodb.svg",
-				selected: false
-			},
-			{
-				name: "Cassandra",
-				avatar: "/img/db/cassandra.png",
-				selected: false
-			},
-			{
-				name: "Firebase",
-				avatar: "/img/db/firebase.png",
-				selected: false
-			},
-			{
-				name: "CouchDB",
-				avatar: "/img/db/couchdb.png",
-				selected: false
-			}
-		];
+		for(var i = 0; i < $scope.databases.length; i++){
+			$scope.databases[i].selected = false;
+		}
+		$scope.$applyAsync();
+
 		$scope.testToRun = 0;
 		$scope.completedTests = [];
 		$scope.done = false;
