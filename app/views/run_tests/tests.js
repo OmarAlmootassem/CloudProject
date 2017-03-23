@@ -66,18 +66,8 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			selected: false
 		},
 		{
-			name: "HBase",
-			avatar: "/img/db/hbase.svg",
-			selected: false
-		},
-		{
 			name: "DynamoDB",
 			avatar: "/img/db/dynamodb.svg",
-			selected: false
-		},
-		{
-			name: "Cassandra",
-			avatar: "/img/db/cassandra.png",
 			selected: false
 		},
 		{
