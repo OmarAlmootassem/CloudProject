@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('CloudApp', ['ngMaterial', 'md-steppers', 'timer',
+angular.module('CloudApp', ['ngMaterial', 'md-steppers', 'timer', 'chart.js',
   'ngRoute',
   'CloudApp.data_representation',
   'CloudApp.tests',

@@ -9,6 +9,10 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
   });
 }])
 
-.controller('ChartsCtrl', [function() {
+.controller('ChartsCtrl', function($scope) {
 
-}]);
+	firebase.database().ref('test_history').on('value', function(snapshot){
+		$scope.dataSnapshot = snapshot.val();
+		console.log($scope.dataSnapshot);
+	});
+});

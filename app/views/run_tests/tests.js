@@ -120,7 +120,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.selectedStep = 2;
 
 			switch(getSelectedTest().id){
-				case 0: //Upload Small Data
+				case 0:
 					getDataFromFirebase("small");
 					break;
 				case 1:
@@ -133,8 +133,10 @@ angular.module('CloudApp.tests', ['ngRoute'])
 					$scope.data = "large"
 					break;
 				case 4:
+					getDataFromFirebase("small");
 					break;
 				case 5:
+					getDataFromFirebase("large");
 					break;
 				default:
 					break;
@@ -153,7 +155,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		var test = getSelectedTest();
 		for (var i = $scope.databases.length - 1; i >= 0; i--) {
 			if($scope.databases[i].selected){
-				if (test.id == 0 || test.id == 1)
+				if (test.id == 0 || test.id == 1 || test.id == 4 || test.id == 5)
 					runPostTest($scope.databases[i]);
 				else if (test.id == 2 || test.id == 3)
 					runGetTest($scope.databases[i]);
@@ -312,6 +314,8 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			test = "post";
 		else if (test == 2 || test == 3)
 			test = "get";
+		else if (test == 4 || test == 5)
+			test = "update"
 		firebase.database().ref('test_history/' + test + '/' + db.name.toLowerCase() + '/' + type).push({
 			ip: ipInfo,
 			time_ms: $scope.time
