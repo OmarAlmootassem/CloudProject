@@ -95,10 +95,10 @@
 			        			<md-card-title>
 			        				<md-card-title-text>
 			        					<span class="md-headline">Test Results</span>
+			        					<timer class="md-subhead" autostart="false" ng-if="!done">{{millis}} ms</timer>
 			        				</md-card-title-text>
 			        			</md-card-title>
 			        			<md-card-content>
-			        				<timer autostart="false">{{millis}} ms</timer>
 			        				<md-content style="background-color: rgb(255,255,255);">
 			        					<md-list flex>
 			        						<md-list-item class="md-3-line" ng-repeat="test in completedTests" ng-click="null">

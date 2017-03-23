@@ -11,6 +11,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 
 .controller('TestsCtrl', function($scope, $http, $mdToast) {
 	var ipInfo, data;
+	var selectedTests = [];
 	$scope.selectedStep = 0;
 	$scope.step1 = {
 		completed: false,
@@ -156,11 +157,24 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		var test = getSelectedTest();
 		for (var i = $scope.databases.length - 1; i >= 0; i--) {
 			if($scope.databases[i].selected){
-				if (test.id == 0 || test.id == 1 || test.id == 4 || test.id == 5)
-					runPostTest($scope.databases[i]);
-				else if (test.id == 2 || test.id == 3)
-					runGetTest($scope.databases[i]);
+				selectedTests.push({
+					test: test,
+					db: $scope.databases[i]
+				});
 			}
+		}
+		nextTest();
+	}
+
+	function nextTest(){
+		$scope.done = true;
+		if (selectedTests.length > 0){
+			$scope.done = false;
+			if (selectedTests[0].test.id == 0 || selectedTests[0].test.id == 1 || selectedTests[0].test.id == 4 || selectedTests[0].test.id == 5)
+				runPostTest(selectedTests[0].db);
+			else if (selectedTests[0].test.id == 2 || selectedTests[0].test.id == 3)
+				runGetTest(selectedTests[0].db);
+			selectedTests.splice(0, 1);
 		}
 	}
 
@@ -187,6 +201,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		if (db.name == "Firebase"){
 			start();
 			$scope.message = "Pushing data to Firebase NoSQL Database...";
+			$scope.$applyAsync();
 			firebase.database().ref("data/" + JSON.parse($scope.data).data_type).set(JSON.parse($scope.data), function(error){
 				if (error){console.error(error.code + ": " + error.message);} else {
                 	stop();
@@ -196,6 +211,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		} else if (db.name == "DynamoDB"){
 			start();
 			$scope.message = "Pushing data to DynamoDB...";
+			$scope.$applyAsync();
 			var data = JSON.parse($scope.data);
 			data.test = guid();
 			$http({
@@ -214,6 +230,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		} else if (db.name == "MongoDB"){
 			start();
 			$scope.message = "Pushing data to MongoDB...";
+			$scope.$applyAsync();
 			$http({
 				url: "http://localhost:3000/mongo_data",
 				method: 'POST',
@@ -229,6 +246,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		} else if (db.name == "CouchDB"){
 			start();
 			$scope.message = "Pushing data to CouchDB...";
+			$scope.$applyAsync();
 			$http({
 				url: "http://localhost:3000/couch_data",
 				method: 'POST',
@@ -249,6 +267,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		if (db.name == "Firebase"){
 			start();
 			$scope.message = "Retrieving Data from Firebase NoSQL Database...";
+			$scope.$applyAsync();
 			firebase.database().ref('data/' + type).once('value').then(function(snapshot){
 				$scope.data = JSON.stringify(snapshot.val(), null, 4);
 				stop();
@@ -257,6 +276,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		} else if (db.name == "DynamoDB"){
 			start();
 			$scope.message = "Retrieving Data from DynamoDB...";
+			$scope.$applyAsync();
 			$http({
 				url: "http://localhost:3000/dynamo_data_" + type,
 				method: 'GET',
@@ -272,6 +292,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		} else if (db.name == "MongoDB"){
 			start();
 			$scope.message = "Retrieving Data from MongoDB...";
+			$scope.$applyAsync();
 			$http({
 				url: "http://localhost:3000/mongo_data_" + type,
 				method: 'GET',
@@ -287,6 +308,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 		} else if (db.name == "CouchDB"){
 			start();
 			$scope.message = "Retrieving Data from CouchDB...";
+			$scope.$applyAsync();
 			$http({
 				url: "http://localhost:3000/couch_data_" + type,
 				method: 'GET',
@@ -323,11 +345,13 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			ip: ipInfo,
 			time_ms: time
 		});
+
 		$scope.completedTests.push({
 			db: db,
 			time: time,
 			result: "Sucess"
 		});
+		nextTest();
 	}
 
 	$scope.$on('timer-stopped', function (event, data){
