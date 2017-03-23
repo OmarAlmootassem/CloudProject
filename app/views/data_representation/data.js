@@ -140,7 +140,6 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
 			average = average/count;
 		$scope.data[0][5] = average.toFixed(2);
 		$scope.$applyAsync();
-		console.log($scope.data)
 	});
 
 	firebase.database().ref('test_history/post/dynamodb/small').on('value', function(snapshot){
@@ -207,7 +206,6 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
 			average = average/count;
 		$scope.data[1][5] = average.toFixed(2);
 		$scope.$applyAsync();
-		console.log($scope.data)
 	});
 
 	firebase.database().ref('test_history/post/firebase/small').on('value', function(snapshot){
@@ -274,7 +272,6 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
 			average = average/count;
 		$scope.data[2][5] = average.toFixed(2);
 		$scope.$applyAsync();
-		console.log($scope.data)
 	});
 
 	firebase.database().ref('test_history/post/couchdb/small').on('value', function(snapshot){
@@ -341,7 +338,6 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
 			average = average/count;
 		$scope.data[3][5] = average.toFixed(2);
 		$scope.$applyAsync();
-		console.log($scope.data)
 	});
 
 
