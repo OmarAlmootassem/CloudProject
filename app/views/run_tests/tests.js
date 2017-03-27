@@ -235,7 +235,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			var data = JSON.parse($scope.data);
 			data.test = guid();
 			$http({
-				url: "http://http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/dynamo_data",
+				url: "http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/dynamo_data",
 				method: 'POST',
 				data: data,
 				headers: {'Content-Type': 'application/json'}
@@ -252,7 +252,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.message = "Pushing data to MongoDB...";
 			$scope.$applyAsync();
 			$http({
-				url: "http://http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/mongo_data",
+				url: "http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/mongo_data",
 				method: 'POST',
 				data: $scope.data,
 				headers: {'Content-Type': 'application/json'}
@@ -268,7 +268,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.message = "Pushing data to CouchDB...";
 			$scope.$applyAsync();
 			$http({
-				url: "http://http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/couch_data",
+				url: "http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/couch_data",
 				method: 'POST',
 				data: JSON.parse(($scope.data).replace(/[_-]/g, " ")),
 				headers: {'Content-Type': 'application/json'}
@@ -298,7 +298,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.message = "Retrieving Data from DynamoDB...";
 			$scope.$applyAsync();
 			$http({
-				url: "http://http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/dynamo_data_" + type,
+				url: "http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/dynamo_data_" + type,
 				method: 'GET',
 				headers: {'Content-Type': 'application/json'}
 			}).success(function(data){
@@ -314,7 +314,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.message = "Retrieving Data from MongoDB...";
 			$scope.$applyAsync();
 			$http({
-				url: "http://http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/mongo_data_" + type,
+				url: "http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/mongo_data_" + type,
 				method: 'GET',
 				headers: {'Content-Type': 'application/json'}
 			}).success(function(data){
@@ -330,7 +330,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 			$scope.message = "Retrieving Data from CouchDB...";
 			$scope.$applyAsync();
 			$http({
-				url: "http://http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/couch_data_" + type,
+				url: "http://ec2-34-208-119-60.us-west-2.compute.amazonaws.com:3000/couch_data_" + type,
 				method: 'GET',
 				headers: {'Content-Type': 'application/json'}
 			}).success(function(data){
