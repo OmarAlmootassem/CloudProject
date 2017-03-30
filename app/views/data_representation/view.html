@@ -1,13 +1,55 @@
 <md-content flex layout-padding>
-	<div>
-		<md-card>
+	<div layout="row" layout-align="center top">
+		<md-card flex="75">
 			<md-card-title>
 				<md-card-title-text>
 					<span class="md-headline">Average Time to Complete Task</span>
 				</md-card-title-text>
 			</md-card-title>
 			<md-card-content>
-				<canvas height="100px" id="line" class="chart chart-line" chart-options="options" chart-data="data" chart-labels="labels" chart-series="series" chart-click="onClick"></canvas>
+				<canvas height="150px" id="line" class="chart chart-line" chart-options="options" chart-data="data" chart-labels="labels" chart-series="series" chart-click="onClick"></canvas>
+			</md-card-content>
+		</md-card>
+	</div>
+	<div layout="row" layout-align="center top" layout-wrap>
+		<md-card flex="45">
+			<md-card-title style="max-height: 20px;">
+				<md-card-title-text>
+					<span class="md-headline">MongoDB</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content>
+				<canvas id="mongoBar" class="chart-horizontal-bar" chart-data="mongoData" chart-labels="labels"></canvas>
+			</md-card-content>
+		</md-card>
+		<md-card flex="45">
+			<md-card-title style="max-height: 20px;">
+				<md-card-title-text>
+					<span class="md-headline">DynamoDB</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content>
+				<canvas id="dynamoBar" class="chart-horizontal-bar" chart-data="dynamoData" chart-labels="labels"></canvas>
+			</md-card-content>
+		</md-card>
+		<md-card flex="45">
+			<md-card-title style="max-height: 20px;">
+				<md-card-title-text>
+					<span class="md-headline">Firebase</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content>
+				<canvas id="fireBar" class="chart-horizontal-bar" chart-data="fireData" chart-labels="labels"></canvas>
+			</md-card-content>
+		</md-card>
+		<md-card flex="45">
+			<md-card-title style="max-height: 20px;">
+				<md-card-title-text>
+					<span class="md-headline">CouchDB</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content>
+				<canvas id="couchBar" class="chart-horizontal-bar" chart-data="couchData" chart-labels="labels"></canvas>
 			</md-card-content>
 		</md-card>
 	</div>
