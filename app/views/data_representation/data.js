@@ -14,32 +14,32 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
 	$scope.tests = [
 		{
 			id: 0,
-			label: "Upload Small Amount of Data",
+			label: "Upload Small Data",
 			selected: false
 		},
 		{
 			id: 1,
-			label: "Upload Large Amount of Data",
+			label: "Upload Large Data",
 			selected: false
 		},
 		{
 			id: 2,
-			label: "Retrieve Small Amount of Data",
+			label: "Retrieve Small Data",
 			selected: false
 		},
 		{
 			id: 3,
-			label: "Retrieve Large Amount of Data",
+			label: "Retrieve Large Data",
 			selected: false
 		},
 		{
 			id: 4,
-			label: "Update Small Amount of Data",
+			label: "Update Small Data",
 			selected: false
 		},
 		{
 			id: 5,
-			label: "Update Large Amount of Data",
+			label: "Update Large Data",
 			selected: false
 		}
 	];
@@ -75,6 +75,7 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
 		[0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0]
 	];
+	$scope.options = {legend: {display: true, position: "bottom"}};
 
 	firebase.database().ref('test_history/post/mongodb/small').on('value', function(snapshot){
 		var average = 0, count = 0;
