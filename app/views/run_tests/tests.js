@@ -345,7 +345,7 @@ angular.module('CloudApp.tests', ['ngRoute'])
 	}
 
 	function getIpAddressInfo(){
-		$http.get('http://ip-api.com/json/').then(function(data){
+		$http.get('http://freegeoip.net/json/').then(function(data){
 			console.log(data);
 			ipInfo = data.data;
 		});
