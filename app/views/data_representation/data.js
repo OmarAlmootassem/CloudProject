@@ -11,6 +11,8 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
 
 .controller('ChartsCtrl', function($scope) {
 
+
+
 	$scope.tests = [
 		{
 			id: 0,
@@ -748,5 +750,150 @@ angular.module('CloudApp.data_representation', ['ngRoute'])
 		});
 	});
 
+	$scope.heatmapData = [];
+	firebase.database().ref('test_history/get/couchdb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/get/couchdb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/get/dynamodb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/get/dynamodb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/get/firebase/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/get/firebase/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/get/mongodb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/get/mongodb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/post/couchdb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/post/couchdb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/post/dynamodb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/post/dynamodb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/post/firebase/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/post/firebase/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/post/mongodb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/post/mongodb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/update/couchdb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/update/couchdb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/update/dynamodb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/update/dynamodb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/update/firebase/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/update/firebase/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/update/mongodb/small').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
+	firebase.database().ref('test_history/update/mongodb/large').on('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			$scope.heatmapData.push({location: new google.maps.LatLng(childSnapshot.val().ip.latitude, childSnapshot.val().ip.longitude), weight: childSnapshot.val().time_ms});
+			$scope.$applyAsync();
+		});
+	});
 
 });

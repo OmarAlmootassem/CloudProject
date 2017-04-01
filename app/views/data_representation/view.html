@@ -53,4 +53,18 @@
 			</md-card-content>
 		</md-card>
 	</div>
+	<div layout="row" layout-align="center top">
+		<md-card flex="75">
+			<md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">Speed based on Location</span>
+				</md-card-title-text>
+			</md-card-title>
+			<md-card-content>
+				<ng-map style="height:600px" center="0,0" zoom="2" map-type-id="HYBRID">
+					<heatmap-layer data="heatmapData" ng-if="heatmapData.length > 0"></heatmap-layer>
+				</ng-map>
+			</md-card-content>
+		</md-card>
+	</div>
 </md-content>
