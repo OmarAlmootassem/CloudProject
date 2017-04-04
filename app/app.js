@@ -19,6 +19,7 @@ angular.module('CloudApp', ['ngMaterial', 'md-steppers', 'timer', 'chart.js', 'n
 		$scope.currentNavItem = $location.path().substring(1);
 	});
 
+	//Authenticate anonymously with Firebase
 	firebase.auth().signInAnonymously().catch(function(error){
 		var errorCode = error.code;
 		var errorMessage = error.message;
